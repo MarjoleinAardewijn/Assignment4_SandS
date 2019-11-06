@@ -26,6 +26,14 @@ public class HuffmanCompression {
     }
 
     /**
+     * Compresses the text that was provided to the constructor.
+     * @return
+     */
+    public String compress() {
+        return "";
+    }
+
+    /**
      * Returns the root of the compression tree.
      * @return the root of the compression tree.
      */
@@ -43,11 +51,4 @@ public class HuffmanCompression {
         return null;
     }
 
-    /**
-     * Compresses the text that was provided to the constructor.
-     * @return
-     */
-    String compress() {
-        return "";
-    }
 }
