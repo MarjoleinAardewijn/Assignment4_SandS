@@ -1,6 +1,7 @@
 package nl.hva.ict.se.ads;
 
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Scanner;
 
 public class HuffmanCompression {
@@ -33,13 +34,12 @@ public class HuffmanCompression {
     }
 
     /**
-     * Returns a list with the character and the code that is used to encode it.
-     * The format per entry is: "'char' -> code"
-     * For "aba" this would result in: ["'b' -> 0", "'a' -> 1"]
-     * And for "cacbcac" this would result in: ["'b' -> 00", "'a' -> 01", "'c' -> 1"]
+     * Returns a Map<Character, String> with the character and the code that is used to encode it.
+     * For "aba" this would result in: ['b' -> "0", 'a' -> "1"]
+     * And for "cacbcac" this would result in: ['b' -> "00", 'a' -> "01", 'c' -> "1"]
      * @return the Huffman codes
      */
-    String[] getCodes() {
+    Map<Character, String> getCodes() {
         return null;
     }
 

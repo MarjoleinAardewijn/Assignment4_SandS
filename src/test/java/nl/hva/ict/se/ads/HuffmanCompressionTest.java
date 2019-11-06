@@ -1,15 +1,15 @@
 package nl.hva.ict.se.ads;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HuffmanCompressionTest {
     HuffmanCompression compressor;
 
-    @Before
+    @BeforeEach
     public void setup() {
         compressor = new HuffmanCompression(getClass().getResourceAsStream("/edu/princeton/cs/algs4/Huffman.java"));
     }
@@ -31,8 +31,8 @@ public class HuffmanCompressionTest {
     @Test
     public void checkUniqueCharacter() {
         // Handle Linux/Mac and Windows end-of-line characters, 86 and 87 are both ok.
-        int numberOfChars = compressor.getCodes().length;
-        assertTrue("You appear to have some very strange end-of-line configuration on your machine!", numberOfChars == 86 || numberOfChars == 87);
+        int numberOfChars = compressor.getCodes().size();
+        assertTrue(numberOfChars == 86 || numberOfChars == 87, "You appear to have some very strange end-of-line configuration on your machine!");
     }
 
     @Test
