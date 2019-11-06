@@ -43,4 +43,11 @@ public class HuffmanCompression {
         return null;
     }
 
+    /**
+     * Compresses the text that was provided to the constructor.
+     * @return
+     */
+    String compress() {
+        return "";
+    }
 }
