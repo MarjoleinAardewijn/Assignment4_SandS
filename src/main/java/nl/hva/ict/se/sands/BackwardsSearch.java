@@ -1,4 +1,4 @@
-package nl.hva.ict.se.ads;
+package nl.hva.ict.se.sands;
 
 public class BackwardsSearch {
     /**

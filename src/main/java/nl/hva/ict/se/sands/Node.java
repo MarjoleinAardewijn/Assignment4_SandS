@@ -1,8 +1,4 @@
-package nl.hva.ict.se.ads;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+package nl.hva.ict.se.sands;
 
 /**
  * NOTE: You are NOT allowed to implement the Serializable interface!!

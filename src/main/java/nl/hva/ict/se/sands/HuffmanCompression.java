@@ -1,4 +1,4 @@
-package nl.hva.ict.se.ads;
+package nl.hva.ict.se.sands;
 
 import java.io.InputStream;
 import java.util.Map;
