@@ -99,19 +99,19 @@ public class BackwardsSearch {
      * @param args
      */
     public static void main(String[] args) {
-        final String needle = "hay";
-        final String haystack = "needleinthehaystack";
+        final String needle = "needle";
+        final String haystack = "whereistheneedle";
 
         System.out.println("Boyer-Moore Backwards:");
         final int matchltr = findLocation(needle, haystack);
         System.out.println("Needle at position: " + matchltr);
-        System.out.println("Number of comparisons: " + countComparisonsForLastSearch);
+        System.out.println("Number of comparisons: " + getComparisonsForLastSearch());
 
         System.out.println("-------------------------------------------");
 
         System.out.println("Boyer-Moore:");
         final int matchrtl = fincLocationBMOriginal(needle, haystack);
         System.out.println("Needle at position: " + matchrtl);
-        System.out.println("Number of comparisons: " + countComparisonsForLastSearch);
+        System.out.println("Number of comparisons: " + getComparisonsForLastSearch());
     }
 }
