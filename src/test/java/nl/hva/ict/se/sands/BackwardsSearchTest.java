@@ -15,21 +15,21 @@ public class BackwardsSearchTest {
 
     @Test
     public void findSingleOccurrence() {
-        int index = searchEngine.BoyerMooreLeftToRight("needle", "whereistheneedleinthishaystack");
+        int index = searchEngine.findLocation("needle", "whereistheneedleinthishaystack");
 
         assertEquals("whereisthe".length(), index);
     }
 
     @Test
     public void cantFindOccurrence() {
-        int index = searchEngine.BoyerMooreLeftToRight("needle", "thereisnothinginthishaystack");
+        int index = searchEngine.findLocation("needle", "thereisnothinginthishaystack");
 
         assertEquals(-1, index);
     }
 
     @Test
     public void simpleCharacterCount() {
-        searchEngine.BoyerMooreLeftToRight("needle", "whereistheneedle");
+        searchEngine.findLocation("needle", "whereistheneedle");
 
         assertEquals(6, searchEngine.getComparisonsForLastSearch());
     }
