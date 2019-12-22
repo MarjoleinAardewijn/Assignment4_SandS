@@ -42,6 +42,8 @@ public class BackwardsSearch {
      * @param haystack the text which might contain the <code>needle</code>.
      * @return -1 if the <code>needle</code> is not found and otherwise the left most index of the first
      * character of the <code>needle</code>.
+     *
+     * Original code from: https://www.baeldung.com/java-full-text-search-algorithms
      */
     public static int fincLocationBMOriginal(String needle, String haystack) {
         char[] pattern = returnCharArray(needle);
