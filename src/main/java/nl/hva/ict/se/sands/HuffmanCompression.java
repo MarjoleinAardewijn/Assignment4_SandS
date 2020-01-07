@@ -36,15 +36,15 @@ public class HuffmanCompression {
      * @return
      */
     public String compress() {
-        Map<Character, Integer> freq = new HashMap<>();
+        Map<Character, Integer> weight = new HashMap<>();
         for (int i = 0; i < text.length(); i++) {
-            if (!freq.containsKey(text.charAt(i))) {
-                freq.put(text.charAt(i), 0);
+            if (!weight.containsKey(text.charAt(i))) {
+                weight.put(text.charAt(i), 0);
             }
-            freq.put(text.charAt(i), freq.get(text.charAt(i)) + 1);
+            weight.put(text.charAt(i), weight.get(text.charAt(i)) + 1);
         }
 
-        root = buildTree(freq);
+        root = buildTree(weight);
 
         setPrefixCodes(root, new StringBuilder());
         StringBuilder s = new StringBuilder();
@@ -58,7 +58,6 @@ public class HuffmanCompression {
     }
 
     private static Node buildTree(Map<Character, Integer> weight) {
-
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
         Set<Character> keySet = weight.keySet();
         for (Character c : keySet) {
