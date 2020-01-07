@@ -18,6 +18,8 @@ public class BackwardsSearch {
 
         int patternSize = pattern.length;
 
+        countComparisonsForLastSearch = 0;
+
         int i = text.length, j = 1;
 
         while ((i - patternSize) >= 0) {
@@ -45,12 +47,14 @@ public class BackwardsSearch {
      *
      * Original code from: https://www.baeldung.com/java-full-text-search-algorithms
      */
-    public static int fincLocationBMOriginal(String needle, String haystack) {
+    public static int findLocationBMOriginal(String needle, String haystack) {
         char[] pattern = returnCharArray(needle);
         char[] text = returnCharArray(haystack);
 
         int patternSize = pattern.length;
         int textSize = text.length;
+
+        countComparisonsForLastSearch = 0;
 
         int i = 0, j = 0;
 
@@ -110,7 +114,7 @@ public class BackwardsSearch {
         System.out.println("-------------------------------------------");
 
         System.out.println("Boyer-Moore:");
-        final int matchrtl = fincLocationBMOriginal(needle, haystack);
+        final int matchrtl = findLocationBMOriginal(needle, haystack);
         System.out.println("Needle at position: " + matchrtl);
         System.out.println("Number of comparisons: " + getComparisonsForLastSearch());
     }
