@@ -58,7 +58,7 @@ public class HuffmanCompression {
             s.append(charPrefixHashMap.get(c));
         }
 
-        System.out.println("Freq: " + freq);
+        System.out.println("Weight: " + weight);
         System.out.println("charPrefixHashMap: " + charPrefixHashMap);
         System.out.println("Output: " + s.toString());
 
