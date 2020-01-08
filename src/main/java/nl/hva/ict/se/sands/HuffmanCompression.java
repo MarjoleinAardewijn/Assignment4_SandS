@@ -22,7 +22,7 @@ public class HuffmanCompression {
     }
 
     /**
-     * Returns the compression ratio assuming that every characters in the text uses 8 bits.
+     * Returns the compression ratio assuming that every character in the text uses 8 bits.
      *
      * @return the compression ratio.
      */
