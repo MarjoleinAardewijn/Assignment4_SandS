@@ -21,6 +21,10 @@ public class HuffmanCompression {
         compress();
     }
 
+    public static void main(String[] args) {
+        new HuffmanCompression("Yes, we made it!");
+    }
+
     /**
      * Returns the compression ratio assuming that every characters in the text uses 8 bits.
      *
@@ -53,6 +57,10 @@ public class HuffmanCompression {
             char c = text.charAt(i);
             s.append(charPrefixHashMap.get(c));
         }
+
+        System.out.println("Freq: " + freq);
+        System.out.println("charPrefixHashMap: " + charPrefixHashMap);
+        System.out.println("Output: " + s.toString());
 
         return s.toString();
     }
