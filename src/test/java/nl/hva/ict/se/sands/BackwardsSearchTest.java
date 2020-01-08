@@ -33,4 +33,32 @@ public class BackwardsSearchTest {
 
         assertEquals(6, searchEngine.getComparisonsForLastSearch());
     }
+
+    @Test
+    public void simpleCharacterCountBackwards() {
+        searchEngine.findLocation("needle", "tofindthenumberofcomparisonsweneedtoknowwheretheneedleisinthishaystack");
+
+        assertEquals(6, searchEngine.getComparisonsForLastSearch());
+    }
+
+    @Test
+    public void simpleCharacterCountBMOriginal() {
+        searchEngine.findLocationBMOriginal("needle", "tofindthenumberofcomparisonsweneedtoknowwheretheneedleisinthishaystack");
+
+        assertEquals(16, searchEngine.getComparisonsForLastSearch());
+    }
+
+    @Test
+    public void simpleCharacterCountBackwards2() {
+        searchEngine.findLocation("needle", "wheretheneedleisinthishaystackandhowmannycomparisonsareneeded");
+
+        assertEquals(6, searchEngine.getComparisonsForLastSearch());
+    }
+
+    @Test
+    public void simpleCharacterCountBMOriginal2() {
+        searchEngine.findLocationBMOriginal("needle", "wheretheneedleisinthishaystackandhowmannycomparisonsareneeded");
+
+        assertEquals(9, searchEngine.getComparisonsForLastSearch());
+    }
 }
