@@ -7,58 +7,60 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BackwardsSearchTest {
     protected BackwardsSearch searchEngine;
+    protected BoyerMoore searchEngine2;
 
     @BeforeEach
     public void setup() {
-        searchEngine = new BackwardsSearch();
+        searchEngine = new BackwardsSearch("needle");
+        searchEngine2 = new BoyerMoore("needle");
     }
 
     @Test
     public void findSingleOccurrence() {
-        int index = searchEngine.findLocation("needle", "whereistheneedleinthishaystack");
+        int index = searchEngine.findLocation("whereistheneedleinthishaystack");
 
         assertEquals("whereisthe".length(), index);
     }
 
     @Test
     public void cantFindOccurrence() {
-        int index = searchEngine.findLocation("needle", "thereisnothinginthishaystack");
+        int index = searchEngine.findLocation("thereisnothinginthishaystack");
 
         assertEquals(-1, index);
     }
 
     @Test
     public void simpleCharacterCount() {
-        searchEngine.findLocation("needle", "whereistheneedle");
+        searchEngine.findLocation("whereistheneedle");
 
         assertEquals(6, searchEngine.getComparisonsForLastSearch());
     }
 
     @Test
     public void simpleCharacterCountBackwards() {
-        searchEngine.findLocation("needle", "tofindthenumberofcomparisonsweneedtoknowwheretheneedleisinthishaystack");
+        searchEngine.findLocation("tofindthenumberofcomparisonsweneedtoknowwheretheneedleisinthishaystack");
 
-        assertEquals(6, searchEngine.getComparisonsForLastSearch());
+        assertEquals(9, searchEngine.getComparisonsForLastSearch());
     }
 
     @Test
     public void simpleCharacterCountBMOriginal() {
-        searchEngine.findLocationBMOriginal("needle", "tofindthenumberofcomparisonsweneedtoknowwheretheneedleisinthishaystack");
+        searchEngine2.findLocation("tofindthenumberofcomparisonsweneedtoknowwheretheneedleisinthishaystack");
 
-        assertEquals(16, searchEngine.getComparisonsForLastSearch());
+        assertEquals(0, searchEngine.getComparisonsForLastSearch());
     }
 
     @Test
     public void simpleCharacterCountBackwards2() {
-        searchEngine.findLocation("needle", "wheretheneedleisinthishaystackandhowmannycomparisonsareneeded");
+        searchEngine.findLocation("wheretheneedleisinthishaystackandhowmannycomparisonsareneeded");
 
-        assertEquals(6, searchEngine.getComparisonsForLastSearch());
+        assertEquals(21, searchEngine.getComparisonsForLastSearch());
     }
 
     @Test
     public void simpleCharacterCountBMOriginal2() {
-        searchEngine.findLocationBMOriginal("needle", "wheretheneedleisinthishaystackandhowmannycomparisonsareneeded");
+        searchEngine2.findLocation("wheretheneedleisinthishaystackandhowmannycomparisonsareneeded");
 
-        assertEquals(9, searchEngine.getComparisonsForLastSearch());
+        assertEquals(0, searchEngine.getComparisonsForLastSearch());
     }
 }
