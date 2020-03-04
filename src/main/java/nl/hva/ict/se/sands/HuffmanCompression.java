@@ -10,7 +10,6 @@ class HuffManComparator implements Comparator<Node> {
     }
 }
 
-// https://www.lavivienpost.com/huffman-encoding-java-code/
 public class HuffmanCompression {
 
     private Map<Character, Integer> charPrefixHashMap = new HashMap<>();
@@ -63,6 +62,11 @@ public class HuffmanCompression {
         Map<Character, String> map = new HashMap<>();
         setPrefixCodes(root, map, "");
 
+        System.out.println("Uncoded: " + text);
+        System.out.println("Encoded: " + encodeString(map, text));
+        System.out.println("Weight: " + charPrefixHashMap.toString());
+        System.out.println("Map: " + map);
+
         return map.toString();
     }
 
@@ -89,6 +93,21 @@ public class HuffmanCompression {
         }
         setPrefixCodes(node.getLeft(), map, s + '0');
         setPrefixCodes(node.getRight(), map, s + '1');
+    }
+
+    /**
+     * Method to return the encoded message
+     * @param charCode
+     * @param input
+     * @return
+     */
+    private static String encodeString(Map<Character, String> charCode, String input) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            stringBuilder.append(charCode.get(input.charAt(i)));
+        }
+        return stringBuilder.toString();
     }
 
     /**
