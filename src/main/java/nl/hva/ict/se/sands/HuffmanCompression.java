@@ -3,11 +3,19 @@ package nl.hva.ict.se.sands;
 import java.io.InputStream;
 import java.util.*;
 
+class HuffManComparator implements Comparator<Node> {
+    @Override
+    public int compare(Node node1, Node node2) {
+        return node1.getWeight() - node2.getWeight();
+    }
+}
+
+// https://www.lavivienpost.com/huffman-encoding-java-code/
 public class HuffmanCompression {
 
-    private static Map<Character, String> charPrefixHashMap = new HashMap<>();
-    static Node root;
-    private final String text;
+    private Map<Character, Integer> charPrefixHashMap = new HashMap<>();
+    private Node root;
+    private String text;
 
     public HuffmanCompression(String text) {
         this.text = text;
@@ -40,74 +48,47 @@ public class HuffmanCompression {
      * @return
      */
     public String compress() {
-        Map<Character, Integer> weight = new HashMap<>();
         for (int i = 0; i < text.length(); i++) {
-            if (!weight.containsKey(text.charAt(i))) {
-                weight.put(text.charAt(i), 0);
-            }
-            weight.put(text.charAt(i), weight.get(text.charAt(i)) + 1);
-        }
-
-        root = buildTree(weight);
-
-        setPrefixCodes(root, new StringBuilder());
-        StringBuilder s = new StringBuilder();
-
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            s.append(charPrefixHashMap.get(c));
-        }
-
-        System.out.println("Weight: " + weight);
-        System.out.println("charPrefixHashMap: " + charPrefixHashMap);
-        System.out.println("Output: " + s.toString());
-
-        return s.toString();
-    }
-
-    private static Node buildTree(Map<Character, Integer> weight) {
-        PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
-        Set<Character> keySet = weight.keySet();
-        for (Character c : keySet) {
-            Node Node = new Node(weight.get(c), c);
-            priorityQueue.offer(Node);
-        }
-        assert priorityQueue.size() > 0;
-
-        while (priorityQueue.size() > 1) {
-
-            Node x = priorityQueue.peek();
-            priorityQueue.poll();
-
-            Node y = priorityQueue.peek();
-            priorityQueue.poll();
-
-            Node sum = new Node(y, x);
-            root = sum;
-
-            priorityQueue.offer(sum);
-        }
-
-        return priorityQueue.poll();
-    }
-
-    private static void setPrefixCodes(Node node, StringBuilder prefix) {
-
-        if (node != null) {
-            if (node.getLeft() == null && node.getRight() == null) {
-                charPrefixHashMap.put(node.getCharacter(), prefix.toString());
-
+            char ch = text.charAt(i);
+            if (!charPrefixHashMap.containsKey(ch)) {
+                charPrefixHashMap.put(ch, 1);
             } else {
-                prefix.append('0');
-                setPrefixCodes(node.getLeft(), prefix);
-                prefix.deleteCharAt(prefix.length() - 1);
-
-                prefix.append('1');
-                setPrefixCodes(node.getRight(), prefix);
-                prefix.deleteCharAt(prefix.length() - 1);
+                int val = charPrefixHashMap.get(ch);
+                charPrefixHashMap.put(ch, ++val);
             }
         }
 
+        root = buildTree(charPrefixHashMap);
+
+        Map<Character, String> map = new HashMap<>();
+        setPrefixCodes(root, map, "");
+
+        return map.toString();
+    }
+
+    Node buildTree(Map<Character, Integer> map) {
+        Queue<Node> nodeQueue = new PriorityQueue<>(11, new HuffManComparator());
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            nodeQueue.add(new Node(entry.getKey(), entry.getValue(), null, null));
+        }
+
+        while (nodeQueue.size() > 1) {
+            Node node1 = nodeQueue.remove();
+            Node node2 = nodeQueue.remove();
+            Node node = new Node('\0', node1.getWeight() + node2.getWeight(), node1, node2);
+            nodeQueue.add(node);
+        }
+
+        return nodeQueue.remove();
+    }
+
+    private void setPrefixCodes(Node node, Map<Character, String> map, String s) {
+        if (node.getLeft() == null && node.getRight() == null) {
+            map.put(node.getCharacter(), s);
+            return;
+        }
+        setPrefixCodes(node.getLeft(), map, s + '0');
+        setPrefixCodes(node.getRight(), map, s + '1');
     }
 
     /**
@@ -126,8 +107,7 @@ public class HuffmanCompression {
      *
      * @return the Huffman codes
      */
-    Map<Character, String> getCodes() {
+    Map<Character, Integer> getCodes() {
         return charPrefixHashMap;
     }
-
 }

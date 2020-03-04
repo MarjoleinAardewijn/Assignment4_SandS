@@ -9,13 +9,9 @@ public class Node implements Comparable<Node> {
     private int weight;
     private Character character;
 
-    public Node(int weight, Character c) {
+    public Node(char ch, int weight,  Node left,  Node right) {
+        this.character = ch;
         this.weight = weight;
-        this.character = c;
-    }
-
-    public Node(Node left, Node right) {
-        this.weight = left.weight + right.weight;
         this.left = left;
         this.right = right;
     }
@@ -40,5 +36,4 @@ public class Node implements Comparable<Node> {
     public Character getCharacter() {
         return character;
     }
-
 }
